@@ -1,0 +1,39 @@
+RADI UNUTAR SOLUTION EXPLORERA!
+Konfiguracije radi u DATINGAPP!
+
+komande za kreiranje .NET apk:
+dotnet new sln  	--pravimo novi solution
+dotnet new webapi -controllers - API      --API je ime
+dotnet sln add API 	--dodajemo u solution 
+
+Koristimo SQLite kao bazu i ekstenziju u VS code (ne koristi se za produkciju ali je odlican za programiranje)
+Ne treba nam database server, vec koristi fajl da smesti nasu bazu, ali kasnije cemo videti kako da to postavimo za produkciju sa pravom bazom
+
+appsettings.Development.json
+"ConnectionStrings": {
+    "DefaultConnection": "Data source=dating.db"
+  }
+Program.cs
+    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+
+Koristimo SQLite jer je cross-platform a SQL Server nije
+
+Ubacivanje entity framework-a:
+dotnet tool install --global dotnet-ef --version 8.0.12
+
+Komande za migraciju i kreiranje baze
+dotnet ef migrations add Ime
+dotnet ef database update
+
+Nakon toga u Search idemo >Sqlite Open DataBase , pa prvo sto izadje, 
+nakon toga u explorer-u ce se pojaviti SQLITE EXPLORER i tu su nam je baza
+
+
+
+
+
+
+
+
+
+izvor: https://dualsoft.udemy.com/course/build-an-app-with-aspnet-core-and-angular-from-scratch/learn/lecture/44314878#overview
