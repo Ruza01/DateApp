@@ -1,5 +1,8 @@
-RADI UNUTAR SOLUTION EXPLORERA!
-Konfiguracije radi u DATINGAPP!
+RADI UNUTAR SOLUTION EXPLORERA! -Back
+RADI UNUTAR DATEAPP! - Front
+Od angular 16 verzije, nemamo vise app module, vec sve komponente kreiramo kao standalone
+Ako se niko ne subscribuje na observable (tok podataka), nista se nece desiti
+
 
 komande za kreiranje .NET apk:
 dotnet new sln  	--pravimo novi solution
@@ -28,9 +31,35 @@ dotnet ef database update
 Nakon toga u Search idemo >Sqlite Open DataBase , pa prvo sto izadje, 
 nakon toga u explorer-u ce se pojaviti SQLITE EXPLORER i tu su nam je baza
 
+Koristimo mkcert, da bi napravili sertifikat da moze nasa aplikacija da radi i na https adresi, a i da bi izbegli upozorenja da nasa stranica nije bezbedna, ovaj sertifikat obezbedjuje da podaci od klijenta do servera stignu bezbedno 
 
+Koncept inherencije (ne ponavljanje koda) -> to resavamo tako sto pravimo Base API kontroler
 
+Ako hocemo da testiramo imamo sa leve strane debugger, napravimo fajl koji trazi i dodamo prve 2 konfiguracije u tom fajlu,
+Zatim idemo na RUN AND SET DEBUG => .NET Core Attach
 
+Kako funkcionise JWT:
+1.Korisnik salje serveru username i pass
+2.server validira podatke i vraca klijentu JWT token, koji klijent cuva lokalno 
+3.clijent salje jwt serveru jwt token sa svakim pojendinacnim zahtevom
+4. server proverava da li je jwt token validan i vraca korisniku odgovor
+Zakljucak: svaki put kad hocemo da pristupimo necemu sto je zasticeno atorizacijom, saljemo JWT token sa tim zahtevom, i server proverava da li je token validan i vraca odgovor
+Token je oznacen sa secret key, on se nalazi u appsettings,
+mora da se oznaci symetric ili asymetric key
+Token je iznace i sa claim (nesto sto korisnik tvrdi o sebi (moje ime je to i to, moj rodjendan je tad i tad...))
+
+Servisi u #C - kreiramo interfejs koji predstavlja apstrakciju toga sta ce servis raditi, bez definisanja kako to radi, i nas servis implementira taj interfejs sa definisanjem toga sta radi metoda iz interfejsa
+
+Kada se korisnik registruje i loguje ne treba da mu vracamo passwordsalt passwordHash i username, vec samo username i token
+Kada injectujemo u kontroler, injectujemo interfejs a ne sam servis
+
+Sada hocu da testiram da li radi autentifikacija (section 4 u postman, get user with bearer token),
+Login ujemo se kao bob npr, i onda posaljemo u header Bearer <token> na putanji https://localhost:5001/api/users/1 i vratice nam boba, sto znaci da je authentifikovan (prijavljen i moze da pristupi toj metodi, a metodu u kontroleru getUser:id smo inace oznacili kao [Authorisation], sto znaci da samo authentifikovan korisnik moze da pristupi )
+
+Ne zelimo da nam konfiguracija cela jwtTokena i ostalih stvari bude implementirana u program.cs
+Svi ovi servisi u program.cs su ekstenzije, pa pravimo folder extensions u API i kazemo da je klasa static, 
+static znaci da mozemo da koristimo metode te klase bez kreiranja novih instanci !
+Cilj je da prosirimo IServiceCollection u kojoj se nalaze inace sve one metode: addCors, addScoped, addAuthentication..
 
 
 
