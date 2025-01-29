@@ -61,6 +61,29 @@ Svi ovi servisi u program.cs su ekstenzije, pa pravimo folder extensions u API i
 static znaci da mozemo da koristimo metode te klase bez kreiranja novih instanci !
 Cilj je da prosirimo IServiceCollection u kojoj se nalaze inace sve one metode: addCors, addScoped, addAuthentication..
 
+Signali u angularu mogu sadrzati bilo koju vrednost, od jednostavnih tipova do slozenih struktura,
+signali su ustvari geteri koji obavestavaju komponenete kada dodje do promene vrednsoti 
+Imamo 2 metode nad signalima , set i update.
+Koristi se za sinhrone stvari, dok se observables koriste za asinhrone stvari 
+
+Koristimo angular signal, da smestimo nas korisnicki objekat
+Da bi smo resili problem osvezavanja stranice (da se ne izloguje korisnik kada se refreshuje), koristimo signale.
+Kad se korisnik prijavi, cuva se u local storage, kada se odjavi brise se iz local storage
+
+Imamo Home komponentu koja je parent i register komponentu koja je child, komunikacija se vrsi tako sto roditelj koji salje, ima Output dekorator, a register koja prima ima input, saljemo usere koje smo dobili iz baze u register komponentu
+Roditelj koji salje, ima uglaste zagrade i properti iz child-a
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
