@@ -72,15 +72,16 @@ Kad se korisnik prijavi, cuva se u local storage, kada se odjavi brise se iz loc
 
 Imamo Home komponentu koja je parent i register komponentu koja je child, komunikacija se vrsi tako sto roditelj koji salje, ima Output dekorator, a register koja prima ima input, saljemo usere koje smo dobili iz baze u register komponentu
 Roditelj koji salje, ima uglaste zagrade i properti iz child-a
+Kad kliknemo na cancel, register (child) komponenta treba da posalje parent komponenti rezultat, da se forma ugasi 
 
+Rute definisemo u Route komponenti (koju je angular definisao) i gde koristimo u toj komponenti ide: routerLink=""
 
+Toastr sluzi da prikazemo greske korisniku
 
+Moramo zastitit rute, jer npr samo registrovan korisnik moze videti nav bar itd, ali nepoznati korisnik moze ukucati https://localhost/members i da vidi sta je tu,
+napravimo guard i u routes imamo canActivate
 
-
-
-
-
-
+Welcome {{accountService.currentUser()?.username | titlecase}} - inicijalno vraca malo slovo ako je tako bilo u bazi, ovo ga vraca u veliko
 
 
 
