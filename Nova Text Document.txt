@@ -83,6 +83,40 @@ napravimo guard i u routes imamo canActivate
 
 Welcome {{accountService.currentUser()?.username | titlecase}} - inicijalno vraca malo slovo ako je tako bilo u bazi, ovo ga vraca u veliko
 
+Ima dela gde se pravi kontroler sa greskama i izuzecima ali nisam to radio 
+
+Imamo 2 tabele , slike i usere, a imamo samo DBSet za usere, ne treba dam i DBSet za slike, jer su useri povezani sa slikama
+
+Koristimo json generator, da bi napunili bazu podacima, kreiramo Seed.cs, to je klasa za popunjavanje baze pdataka
+
+U program cs. imamo kod za inicijalizaciju base podataka prilikom pokretanja aplikacije
+
+(Nije neophodno ali sam radio) : dodao sam sloj apstrakcije(Reposotory), napravio interfejs, implementirao ga, dodao u AplicationServiceExtensions
+Izmenimo UserController: nismo injectovali context, IUserRepository
+
+Relations:
+Moramo povezati tabele sami, da bi dobili povezane podatke iz baze (photos...)
+Kada to uradimo, dobijamo gresku JSON serializer, to resavamo tako sto pravimo DTO, i stavljamo unutra sve sto zelimo da vratimo kada se pozove metoda lsitOfUsers.Kada smo u kontroleru Users, i zelimo listu usera, kada se vrati sa servera, konvertuje se u AppUser, a mi zelimo da AppUsera mapiramo na MemberDto, iz tog razloga koristimo AutoMapper, mogli smo i da kad vracamo AppUsera da vracamo MemberDto, i u return da napisemo nesto ovako: return new memberDto { pa da mapiramo svaki properti rucno}
+Pravimo foleder Helpers i u njemu AutoMapperProfile, u kontruktoru pravimo mapu 
+U kontroleru iz metode vracamo MemberDto i pravimo usersToReturn, sve se lepo mapiralo sem photoUrl, jer zelimo da se u useru prikaze u propertiju photourl, ona fotka koja je main u photo entitetu to resavamo ovako:
+.ForMember(d => d.PhotoUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain)!.Url));
+Na kraju, pravimo kod koji je clean, u userRepository iz baze ne vracamo AppUsera nego odmah MemberDto i radimo sa njim,
+jedino sto dodajemo je Queriable Extension: 
+
+
+
+(Postman)
+Kad hocemo da vratimo sve usere, moramo da se prijavimo kao neko ko je vec registrovan, i da iskoristimo njegov token u Authentication zagalvlju
+
+
+
+
+
+
+
+
+
+
 
 
 

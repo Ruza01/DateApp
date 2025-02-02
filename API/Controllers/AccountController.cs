@@ -15,24 +15,24 @@ public class AccountController(DataContext context, ITokenService tokenService) 
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         if(await UserExists(registerDto.Username)) return BadRequest("Usename is taken");
+        return Ok();
+        // using var hmac = new HMACSHA512();  //generise slucajnu vrednost (salt/kljuc), odnosno to se zove hash
 
-        using var hmac = new HMACSHA512();  //generise slucajnu vrednost (salt/kljuc), odnosno to se zove hash
+        // var user = new AppUser
+        // {
+        //     UserName = registerDto.Username.ToLower(),
+        //     PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)), //rastavlja lozinku na niz bajtova jer HMAC radi sa bajtovima i racuna hes sa slucajnom vrednoscu salt
+        //     PasswordSalt = hmac.Key //pristup toj slucajnoj vrednosti (salt/kljuc), kasnije kad se korisnik loguje ovo se koristi da desifrujemo sifru i proverimo da li se poklapa sifra prijavljnog korisnika sa onim sto je u bazi 
+        // };
 
-        var user = new AppUser
-        {
-            UserName = registerDto.Username.ToLower(),
-            PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)), //rastavlja lozinku na niz bajtova jer HMAC radi sa bajtovima i racuna hes sa slucajnom vrednoscu salt
-            PasswordSalt = hmac.Key //pristup toj slucajnoj vrednosti (salt/kljuc), kasnije kad se korisnik loguje ovo se koristi da desifrujemo sifru i proverimo da li se poklapa sifra prijavljnog korisnika sa onim sto je u bazi 
-        };
+        // context.Users.Add(user);
+        // await context.SaveChangesAsync();
 
-        context.Users.Add(user);
-        await context.SaveChangesAsync();
-
-        return new UserDto
-        {
-            Username = user.UserName,
-            Token = tokenService.CreateToken(user)
-        };
+        // return new UserDto
+        // {
+        //     Username = user.UserName,
+        //     Token = tokenService.CreateToken(user)
+        // };
     }
 
     [HttpPost("login")]

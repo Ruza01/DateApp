@@ -1,5 +1,6 @@
 using System;
 using API.Data;
+using API.Interfaces;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,8 @@ public static class ApplicationServiceExtensions
         });
         services.AddCors();
         services.AddScoped<ITokenService, TokenService>(); //ovo je dependency injection, on sam raspolaze kada i koliko puta ce injectovati ovaj servis u kontroler
+        services.AddScoped<IUserRepository, UserRepository>();
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         return services;
     }
