@@ -101,21 +101,22 @@ Pravimo foleder Helpers i u njemu AutoMapperProfile, u kontruktoru pravimo mapu
 U kontroleru iz metode vracamo MemberDto i pravimo usersToReturn, sve se lepo mapiralo sem photoUrl, jer zelimo da se u useru prikaze u propertiju photourl, ona fotka koja je main u photo entitetu to resavamo ovako:
 .ForMember(d => d.PhotoUrl, o => o.MapFrom(s => s.Photos.FirstOrDefault(x => x.IsMain)!.Url));
 Na kraju, pravimo kod koji je clean, u userRepository iz baze ne vracamo AppUsera nego odmah MemberDto i radimo sa njim,
-jedino sto dodajemo je Queriable Extension: 
-
-
+jedino sto dodajemo je Queriable Extension, to znaci da ne moramo da mapiramo unutar kontrolera, vec u repositoryPattern pomocu queryable extensions koristimo projekciju iz repozitorijuma u dto
 
 (Postman)
 Kad hocemo da vratimo sve usere, moramo da se prijavimo kao neko ko je vec registrovan, i da iskoristimo njegov token u Authentication zagalvlju
 
+Sada zelimo da ono sto server vraca, napravimo takav interface i da dobijemo podatke na klijentu, imamo tool koji radi to (pretvara json format u interface), zove se jsontots
 
+Zasto sam stavio environments.ts umesto .development, zato sto pise u angular.json da su zamenjeni i da ako koristimo environments.ts, zapravo koristimo .development
 
+Input elementi sluze da primaju od roditelja, ali to su zapravo i signali, tako da mogu da se koriste kao signal()
 
+Koristio sam DBeaver da vidim bazu, jer u sqlite u vs code ne moze da se edituje (to je u sustini database tool)
 
+Da bi se dobila lista svih usera, korisnik mora biti autentifikovan i to je jasno, mi smo do sada slali u http zahtev options i tu Bearer token, to je dobro ako imamo malo zahteva ali ako imamo vise, pravimo interceptor, sto znaci da nam ne treba options zaglavlje u memberService, a to znaci da ukoliko smo autentifikovani, onda svaki req ce imati authorization header.Moramo u appConfig da registrujemo taj interceptor
 
-
-
-
+Koristio sam ng-gallery za slike
 
 
 

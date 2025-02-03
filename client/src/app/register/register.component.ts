@@ -14,7 +14,6 @@ export class RegisterComponent {
 
   private accountService = inject(AccountService);
   private toastr = inject(ToastrService);
-  usersFromHomeComponent = input.required<any>();   //stari nacin bi bio @Input
   registerCancel = output<boolean>();
   model: any = {};
 

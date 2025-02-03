@@ -13,7 +13,7 @@
     "Country": "Djibouti",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women32jpg",
+        "Url": "https://randomuser.me/api/portraits/women/32.jpg",
         "IsMain": true
       }
     ]
@@ -32,7 +32,7 @@
     "Country": "Mayotte",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women5jpg",
+        "Url": "https://randomuser.me/api/portraits/women/5.jpg",
         "IsMain": true
       }
     ]
@@ -51,7 +51,7 @@
     "Country": "Bermuda",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women9jpg",
+        "Url": "https://randomuser.me/api/portraits/women/9.jpg",
         "IsMain": true
       }
     ]
@@ -70,7 +70,7 @@
     "Country": "Argentina",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women73jpg",
+        "Url": "https://randomuser.me/api/portraits/women/73.jpg",
         "IsMain": true
       }
     ]
@@ -89,7 +89,7 @@
     "Country": "China",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/women37jpg",
+        "Url": "https://randomuser.me/api/portraits/women/37.jpg",
         "IsMain": true
       }
     ]
@@ -108,7 +108,7 @@
     "Country": "Fiji",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men24jpg",
+        "Url": "https://randomuser.me/api/portraits/men/24.jpg",
         "IsMain": true
       }
     ]
@@ -127,7 +127,7 @@
     "Country": "Dominica",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men20jpg",
+        "Url": "https://randomuser.me/api/portraits/men/20.jpg",
         "IsMain": true
       }
     ]
@@ -146,7 +146,7 @@
     "Country": "South Africa",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men70jpg",
+        "Url": "https://randomuser.me/api/portraits/men/70.jpg",
         "IsMain": true
       }
     ]
@@ -165,7 +165,7 @@
     "Country": "French Southern Territories",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men45jpg",
+        "Url": "https://randomuser.me/api/portraits/men/45.jpg",
         "IsMain": true
       }
     ]
@@ -184,7 +184,7 @@
     "Country": "Faroe Islands",
     "Photos": [
       {
-        "Url": "https://randomuser.me/api/portraits/men99jpg",
+        "Url": "https://randomuser.me/api/portraits/men/99.jpg",
         "IsMain": true
       }
     ]

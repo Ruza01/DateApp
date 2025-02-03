@@ -15,7 +15,7 @@
     Photos: [
       {
         Url: function(num) {
-          return 'https://randomuser.me/api/portraits/women' + num.integer(1,99) + 'jpg';
+          return 'https://randomuser.me/api/portraits/women/' + num.integer(1,99) + '.jpg';
         },
         IsMain: true
       }  
