@@ -115,8 +115,35 @@ Input elementi sluze da primaju od roditelja, ali to su zapravo i signali, tako 
 Koristio sam DBeaver da vidim bazu, jer u sqlite u vs code ne moze da se edituje (to je u sustini database tool)
 
 Da bi se dobila lista svih usera, korisnik mora biti autentifikovan i to je jasno, mi smo do sada slali u http zahtev options i tu Bearer token, to je dobro ako imamo malo zahteva ali ako imamo vise, pravimo interceptor, sto znaci da nam ne treba options zaglavlje u memberService, a to znaci da ukoliko smo autentifikovani, onda svaki req ce imati authorization header.Moramo u appConfig da registrujemo taj interceptor
+Interceptori zapravo sluze tako sto se svaki put pozovu kada napravimo http zahtev, kao za loading spiner, u interceptor smo napravili da kada se posalje http zahtev da se loading spiner setuje, kada se dobije response, onda se ugasi
 
 Koristio sam ng-gallery za slike
+
+Kada koristimo formsModule, jedino dugme unutar forme ce raditi ako je tipa submit, ako zelimo neko drugo dugme da bude submit, nasoj formi moramo dodati id, a dugmetu form="isto ime kao id"
+
+Dekorator ViewChild omogucava pristup template reference elementima koje smo dodelili formi, da mozemo pristupati njima iz .ts fajla
+
+Zelimo da kad korisnik edituje profil i ode na neku rutu, ona ga upozorava da prethodono sacuva promene, inace nece biti izmena sacuvana
+zato pravimo jos jedan guard (can Deactivate)
+
+Ukoliko korisnik napusti stranicu, ima opcija da takodje vodi racuna jer promene nece biti sacuvane, to se ovako radi: @HostListener('window:beforeunload', ['$event']) notify($event: any) {
+    if (this.editForm?.dirty) {
+      $event.returnValue = true;
+    }
+  }
+
+
+Sada zelimo obrnutu situaciju, da mapiramo MemberUpdateDto u AppUser, kada updatujemo usera
+
+Korisitmo ngx-spinner za cekanje nekih stavki, treba da stavimo loading spinner komponentu sto vise u nasoj apk, pravimo interceptor za loading spiner i servis
+
+
+
+
+
+
+
+
 
 
 
