@@ -47,9 +47,9 @@
                     <p>{{member.intersts}}</p>
                 </tab>
                 <tab heading="Photos" #photoTab="tab">
-                    @if (photoTab.active) {
+                    @if (photoTab.active) {     
                         <gallery 
-                        [items]="images" 
+                        [items]="images"    
                         class="gallery"
                         >
                     </gallery>

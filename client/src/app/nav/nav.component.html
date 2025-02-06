@@ -18,6 +18,9 @@
 
       @if (accountService.currentUser()) {
         <div class="btn-group" dropdown>
+          <img class="me-2"
+            src="{{accountService.currentUser()?.photoUrl}}" 
+          >
           <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
                   aria-controls="dropdown-basic">
             Welcome {{accountService.currentUser()?.username | titlecase}} <span class="caret"></span>

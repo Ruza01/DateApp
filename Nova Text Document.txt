@@ -116,6 +116,9 @@ Koristio sam DBeaver da vidim bazu, jer u sqlite u vs code ne moze da se edituje
 
 Da bi se dobila lista svih usera, korisnik mora biti autentifikovan i to je jasno, mi smo do sada slali u http zahtev options i tu Bearer token, to je dobro ako imamo malo zahteva ali ako imamo vise, pravimo interceptor, sto znaci da nam ne treba options zaglavlje u memberService, a to znaci da ukoliko smo autentifikovani, onda svaki req ce imati authorization header.Moramo u appConfig da registrujemo taj interceptor
 Interceptori zapravo sluze tako sto se svaki put pozovu kada napravimo http zahtev, kao za loading spiner, u interceptor smo napravili da kada se posalje http zahtev da se loading spiner setuje, kada se dobije response, onda se ugasi
+Korisitmo ngx-spinner za cekanje nekih stavki, treba da stavimo loading spinner komponentu sto vise u nasoj apk, pravimo interceptor za loading spiner i servis
+Sada imamo problem da imamo previse loading spinera za svaki http zahtev, zelimo da imamo loading spiner kada se nomralno ucita apk privi put, ali posle toga da kada se predje sa kartice listOFUsers na kokretnog usera, zelimo da se to negde cuva i to resavamo pomocu signala
+U memberService postavljamo signal listu membera i subscrajbujemo se tu u servisu i postavimo signal (set), resili smo problem sa prelaska izmedju komponenti Matches i list, sada zelimo sve to isto da uradimo samo nad komponentom konkretnog usera, to resavamo malo drugacije u servisu.I na kraju naravno to zelimo da uradimo u updateUser 
 
 Koristio sam ng-gallery za slike
 
@@ -135,16 +138,23 @@ Ukoliko korisnik napusti stranicu, ima opcija da takodje vodi racuna jer promene
 
 Sada zelimo obrnutu situaciju, da mapiramo MemberUpdateDto u AppUser, kada updatujemo usera
 
-Korisitmo ngx-spinner za cekanje nekih stavki, treba da stavimo loading spinner komponentu sto vise u nasoj apk, pravimo interceptor za loading spiner i servis
+Za smestanje slika koristicemo servis koji se zove Cloudinary, imamo 10GB storage-a for free za koriscenje
+Kako ce ici procedura:
+1.klijet uplouduje sliku sa jwt tokenom (samo autentifikovan korisnik ce moci da uploaduje sliku)
+2.Server uplouduje sliku na Cloudinary(ima API kljuc koji mozemo koristiti tako da samo nas server moze pristupiti cloudinary)
+3.cloudinary smesta sliku i vraca response (response sadrzi publicId i url)
+4.API cuva url slike i public ID iz Cloudinary-a
+5.DB vraca serveru autogenerisani ID
+6. 201 Created Response- to je ono sto vracamo korsiniku sa location header
 
+Gde se taj kljuc nalazi? (korak 3)
+Programabile data => view API keys
 
+Za front koristimo ng2-file-upload package i angular file upload valor software,
+Svuda u html koji sam kopirao sa neta, gde ima greske dodao sam ?
 
-
-
-
-
-
-
+Kada uploadujemo sliku, na serveru radi, na frontu radi, ali kad odemo na tab matches, i dalje stoji stara slika dok se ne refresuje stranica, to je problem u member servisu, treba signal da se update-uje:
+U f-ju setMainPhoto ne prosledjujemo vise photoId: number, vec photo:Photo
 
 
 
