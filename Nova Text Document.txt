@@ -156,9 +156,38 @@ Svuda u html koji sam kopirao sa neta, gde ima greske dodao sam ?
 Kada uploadujemo sliku, na serveru radi, na frontu radi, ali kad odemo na tab matches, i dalje stoji stara slika dok se ne refresuje stranica, to je problem u member servisu, treba signal da se update-uje:
 U f-ju setMainPhoto ne prosledjujemo vise photoId: number, vec photo:Photo
 
+Trenutno sam koristio template forms, tako sto u html kodu dodam template reference i pokupim podatke kad se klikne submit, sada cemo korsititi reaktivne forme, to prvo radimo u register komponenti (Vise ne koristimo FromsMoudule vec ReactiveFormsModule)
+pravimo reaktivnu formu FormGroup i propertije unutar FormControl, u html kodu umesto #imeForme, koristimo [formGroup].
+Umesto [(ngModel)]="model.username", koristimo formControlName="username"
+Za confirm password treba nam customValidator, koji se pise ovako: 
+matchValues(matchTo: string): ValidatorFn {
+    return (control: AbstractControl) => {
+      return control.value === control.parent?.get(matchTo)?.value ? null : {isMatching: true}
+    }
+  }
+Ali ako korisnik zeli da promeni password, u confirmPassword ce i dalje pisati valid, to resavamo ovako: 
+ this.registerForm.controls['password'].valueChanges.subscribe({
+      next: () => this.registerForm.controls['confirmPassword'].updateValueAndValidity()
+    })
+
+Koristimo bootstrap, forms => validations da korisniku prikazemo da li je valid ili ne
+Jos jedna napredna stavka, umest formGroup, injectujemo servis i korisitimo formBuilder!
+
+za dateTime mozemo jednostavno u html da stavimo type="'date'", ali ja cu koristiti angular bootstrap date picker
 
 
 
 
 
-izvor: https://dualsoft.udemy.com/course/build-an-app-with-aspnet-core-and-angular-from-scratch/learn/lecture/44314878#overview
+
+
+
+
+
+
+
+
+
+
+
+

@@ -19,7 +19,7 @@
       @if (accountService.currentUser()) {
         <div class="btn-group" dropdown>
           <img class="me-2"
-            src="{{accountService.currentUser()?.photoUrl}}" 
+            [src]="accountService.currentUser()?.photoUrl || './user.png'" 
           >
           <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
                   aria-controls="dropdown-basic">

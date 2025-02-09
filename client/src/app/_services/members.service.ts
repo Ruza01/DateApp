@@ -40,7 +40,7 @@ export class MembersService {
   setMainPhoto(photo: Photo) {
     return this.http.put(this.baseUrl + '/users/set-main-photo/' + photo.id, {}).pipe(
       tap(() => {
-        this.memebers.update(members => members.map(m => {
+        this.memebers.update(members => members.map(m => {    //mora da se update-uje signal da bi se svuda videle promene, a ne tek kada osvezimo stranicu
           if (m.photos.includes(photo)) {
             m.photoUrl = photo.url
           }
