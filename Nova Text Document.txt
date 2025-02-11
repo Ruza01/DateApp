@@ -174,10 +174,29 @@ Koristimo bootstrap, forms => validations da korisniku prikazemo da li je valid 
 Jos jedna napredna stavka, umest formGroup, injectujemo servis i korisitimo formBuilder!
 
 za dateTime mozemo jednostavno u html da stavimo type="'date'", ali ja cu koristiti angular bootstrap date picker
+Kad se registrujemo na klijentu u sekciji datetime, kad selektujemo datum, on ga pamti kao : 2025-02-11T15:30:49.000Z, a nama treba dateOnly,to resavamo ovako: 
+ private getDateOnly(dob: string | undefined) {
+    if (!dob) return;
+    return new Date(dob).toISOString().slice(0,10);
+  }
 
+Sta je paginacija???
+Ako imamo mnogo korisnika, ne treba mnogo stvari da vracamo iz baze zbog performansi
+IQueryable<Uer>	==> var query = context.Users
+					.Where(x => x.Gender == gender)
+					.OrderBy(x => x.Username)
+					.Take(5)
+					.Skip(5)
+					.AsQuerable()
 
+posle to moramo pozvati query.ToListAsync(), query.ToDictionary()..... da bi se videle promene u bazi
 
+Pagination Header koristimo jer zelimo da vratimo PagedList u header, moze i kroz body, svejdeno
 
+=========================================================================================
+FILTRIRANJE SORTIRANJE I KESIRANJE NISAM URADIO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+od 153-165 zakljucno s njima 
+=========================================================================================
 
 
 
