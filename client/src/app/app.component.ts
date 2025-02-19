@@ -18,11 +18,12 @@ export class AppComponent implements OnInit {
    this.setCurrentUser();
   }
 
+  //kada se refresuje stranica
   setCurrentUser() {
     const userString = localStorage.getItem('user');  //proveravamo sta je u local storage
     if (!userString) return;
     const user = JSON.parse(userString);
-    this.accountService.currentUser.set(user);
+    this.accountService.setCurrentUser(user);
   }
 
   

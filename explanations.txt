@@ -193,10 +193,48 @@ posle to moramo pozvati query.ToListAsync(), query.ToDictionary()..... da bi se 
 
 Pagination Header koristimo jer zelimo da vratimo PagedList u header, moze i kroz body, svejdeno
 
-=========================================================================================
-FILTRIRANJE SORTIRANJE I KESIRANJE NISAM URADIO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-od 153-165 zakljucno s njima 
-=========================================================================================
+
+Kreiramo tabelu spoja UserLike jer zelimo tako da se zove, kada smo dodali u UserEntity vise na vise vezu sa samim AppUserom, i kreirali migracije, on nam je napravio sam tabelu AppUserAppUser, sto mi ne zelimo tako da se zove nego je sami pravimo 
+Kada to radimo, mora da kazemo EF sta koristimo za primary key a i veze
+
+Kada odredjeni koristnik ima neku interakciju na profilu(pritom je logovan), zelimo da updatujemo LastActive properti u njegovom profilu, iz tog razloga koristimo action filter
+Dodajemo u helpers LogUserActivity
+Korisitmo interfejs IAsyncActionFilter
+Registrujemo servis
+Dodamo ovo u baseApiController : [ServiceFilter(typeof(LogUserActivity))]
+
+Sada zelimo na klijentu da prikazemo bolje datume i vreme, tacnije (lastActive i member since)
+Koristimo ngx timeago, uvezemo modul i samo dodamo | timeago i | date: dd-MMM yyyy
+
+Kreiramo kes
+
+==============================================================
+163 i 164 i 175 nisam odgledao! - to je kesiranje
+==============================================================
+i 175 likesa feature, odgledaj kad odgledas ovo iznad
+
+AutoMapper nam zapravo sluci da kreiramo mapu kako ce se recimo message mapirati na messageDto, isti propertiji se mapiraju automatski, a pojedine propertije mi definisemo kako ce se mapirati!
+
+Zelimo da loading bude tek kada se udje u messages tab u profilu, problem je jer unutar memberDetail komponente koristimo child komponentu koja ima ngOnInit i zato i loading imamo.
+Dodajemo #memberTbas (ime tabseta), a ovo dodajemo u .ts fajl
+@ViewChild('memberTabs') memberTabs?: TabsetComponent; (da bi videli u .ts fajlu ono sto je u htmlu)
+Ono sto jos trebamo uraditi jeste da u memerDetail komponenti ucitamo poruke i da ih prosledimo u child komponentu (memberessages)
+
+
+Zelimo da kada kliknemo na messages- da se otvori u profilu tab messages
+ <button (click)="selectTab('Messages')" class="btn btn-success">Message</button> ovo je heading ('Messages')
+
+Zelimo sada kad kliknemo na Matches kartici na posalji poruku, da nas odvede na taj profil 
+To postizemo sa queryParams:
+[queryParams]="{tab: 'Messages'}"> 
+
+==============================================================================================================================================
+190 nisam odgledao - korisi se route Resolves (zeli da kad kiknemo na posalji poruku iz Matches da nas odvede na profile i na karticu Message)
+==============================================================================================================================================
+
+(click)="$event.stopPropagation()" znaci da se ne odradi rutiranje vec samo izvrsi clik koji je nakon ovoga, u nasem slucaju delete
+
+
 
 
 

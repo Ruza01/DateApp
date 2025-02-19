@@ -19,6 +19,7 @@ public class UsersController(
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
     {
+        userParams.CurrentUsername = User.GetUsername();
         var users = await userRepository.GetMembersAsync(userParams);
 
         Response.AddPaginationHeader(users);    //metoda napisana u Extensions
@@ -39,11 +40,7 @@ public class UsersController(
     [HttpPut]
     public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
     {
-        var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;    //uzimanje username-a iz tokena
-
-        if (username == null) return BadRequest("No username found in token");
-
-        var user = await userRepository.GetUserByUsernameAsync(username);
+        var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
 
         if (user == null) return BadRequest("Could not find user");
 
@@ -57,11 +54,7 @@ public class UsersController(
     [HttpPost("add-photo")]
     public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
     {
-        var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;    
-
-        if (username == null) return BadRequest("No username found in token");
-
-        var user = await userRepository.GetUserByUsernameAsync(username);
+        var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
 
         if (user == null) return BadRequest("Cannot find user");
 
@@ -86,12 +79,8 @@ public class UsersController(
     [HttpPut("set-main-photo/{photoId:int}")]
     public async Task<ActionResult> SetMainPhoto(int photoId)
     {
-        var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;    
-
-        if (username == null) return BadRequest("No username found in token");
-
-        var user = await userRepository.GetUserByUsernameAsync(username);
-
+        var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
+        
         if (user == null) return BadRequest("Cannot find user");
 
         var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
@@ -113,11 +102,7 @@ public class UsersController(
     [HttpDelete("delete-photo/{photoId:int}")]
     public async Task<ActionResult> DeletePhoto(int photoId)
     {
-        var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;    
-
-        if (username == null) return BadRequest("No username found in token");
-
-        var user = await userRepository.GetUserByUsernameAsync(username);
+        var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
 
         if (user == null) return BadRequest("Cannot find user");
 
